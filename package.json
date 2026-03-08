@@ -1,0 +1,20 @@
+{
+  "name": "wishlist-cf-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev src/index.ts --local",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test:public-privacy": "rm -rf .tmp-test-build && tsc src/index.ts src/ui.ts --module esnext --moduleResolution bundler --target es2022 --types @cloudflare/workers-types --lib es2022 --skipLibCheck --outDir .tmp-test-build --noEmit false && node --test tests/public-privacy.test.mjs tests/ui-layout.test.mjs && rm -rf .tmp-test-build"
+  },
+  "dependencies": {
+    "hono": "^4.8.2"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260222.0",
+    "typescript": "^5.8.2",
+    "wrangler": "^4.5.0"
+  }
+}
